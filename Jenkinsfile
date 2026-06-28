@@ -13,12 +13,12 @@ pipeline {
         }
         stage("Third Stage"){
             steps {
-                sh "echo "Hello World""
+                sh 'echo "Hello World"'
             }
         }
         stage("Fourth Stage"){
             steps {
-                sh "echo "Hello World""
+                sh 'echo "Hello World"'
             }
         }
     }
