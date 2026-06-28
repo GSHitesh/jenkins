@@ -1,11 +1,16 @@
 pipeline {
-    agent {
-        any
-    }
+    agent any
+
     stages {
-        stage ("First Stage"){
+        stage('Check Docker') {
             steps {
-                sh 'echo "Hello World"'
+                sh '''
+                whoami
+                pwd
+                which docker
+                docker --version
+                echo $PATH
+                '''
             }
         }
     }
