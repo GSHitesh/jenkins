@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage ("First Stage"){
             steps {
-                sh "echo "Hello ${params.Name}""
+                sh "echo 'Hello ${params.Name}'"
             }
         }
         stage ("Second Stage"){
