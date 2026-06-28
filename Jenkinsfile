@@ -1,9 +1,12 @@
 pipeline {
     agent any
+    parameters {
+        string(name: 'Name', defaultValue: 'Hitesh', description: 'Enter your name')
+    }
     stages {
         stage ("First Stage"){
             steps {
-                sh 'echo "Hello World"'
+                sh "echo "Hello ${params.Name}""
             }
         }
         stage ("Second Stage"){
