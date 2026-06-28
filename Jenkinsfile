@@ -1,16 +1,14 @@
 pipeline {
-    agent any
-
+    agent {
+        docker {
+            image 'maven:3.8.1-jdk-11'
+            args '-v /root/.m2:/root/.m2'
+        }
+    }
     stages {
-        stage('Check Docker') {
+        stage ("First Stage"){
             steps {
-                sh '''
-                whoami
-                pwd
-                which docker
-                docker --version
-                echo $PATH
-                '''
+                sh 'echo "Hello World"'
             }
         }
     }
