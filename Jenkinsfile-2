@@ -8,6 +8,7 @@ pipeline {
             steps {
                 sh "echo 'Hello ${params.Name}'" 
                 sh "touch test.txt"   
+                sh "echo 'Hello ${params.Name}' > test.txt"
             }
         }
     }
