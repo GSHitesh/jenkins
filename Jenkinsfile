@@ -30,4 +30,13 @@ pipeline {
             }
         }
     }
+    finally {
+        echo "Pipeline completed"
+    }
+    
+    success {
+        script {
+            echo "Pipeline completed successfully"
+        }
+    }
 }
