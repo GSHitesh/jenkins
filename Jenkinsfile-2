@@ -15,6 +15,7 @@ pipeline {
     post ('Cleanup') {
         always {
             // cleanWs()
+            echo "always block completed"
         }
     }
 }
