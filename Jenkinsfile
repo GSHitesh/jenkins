@@ -36,11 +36,17 @@ pipeline {
                 echo "always block completed"
             }
         }
-    }
-    
-    success {
-        script {
-            echo "Pipeline completed successfully"
+
+        success {
+            script {
+                echo "success block completed"
+            }
+        }
+
+        failure {
+            script {
+                echo "failure block completed"
+            }
         }
     }
 }
