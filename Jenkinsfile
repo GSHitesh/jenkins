@@ -30,8 +30,12 @@ pipeline {
             }
         }
     }
-    finally {
-        echo "Pipeline completed"
+    post ('Post Build') {
+        always {
+            script {
+                echo "always block completed"
+            }
+        }
     }
     
     success {
