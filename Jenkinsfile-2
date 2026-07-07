@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: 'Name', defaultValue: 'Hitesh', description: 'Enter your name')
+    }
+    stages {
+        stage ("First Stage"){
+            steps {
+                sh "echo 'Hello ${params.Name}'" 
+                sh "touch test.txt"   
+            }
+        }
+    }
+    post ('Cleanup') {
+        always {
+            cleanWs()
+        }
+    }
+}
