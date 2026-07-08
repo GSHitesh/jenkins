@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         string(username: 'Name', defaultValue: 'Hitesh', description: 'Enter your name')
-        string(username: 'Age', defaultValue: '25', description: 'Enter your age')
+        string(userage: 'Age', defaultValue: '25', description: 'Enter your age')
     }
 
     stages {
