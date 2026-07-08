@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    parameters {
+        string(username: 'Name', defaultValue: 'Hitesh', description: 'Enter your name')
+        string(username: 'Age', defaultValue: '25', description: 'Enter your age')
+    }
+
+    stages {
+        stage ("Build") {
+            steps {
+                sh "echo 'Hello ${params.Name}'"
+                sh "echo 'Your age is ${params.Age}'"
+            }
+        }
+        stage ("Deploy") {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'ea2486fa-e09c-4048-b108-9b867c7209fc', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                    sh "echo 'Deploying with username: $USERNAME and password: $PASSWORD'"
+                }
+            }
+        }
+    }
+    post ('Cleanup') {
+        always {
+            cleanWs()
+            echo "always block completed"
+        }
+    }
+}
