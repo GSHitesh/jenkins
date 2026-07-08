@@ -4,11 +4,16 @@ pipeline {
         string(name: 'Name', defaultValue: 'Hitesh', description: 'Enter your name')
     }
     stages {
-        stage ("First Stage"){
+        stage ("Development") {
             steps {
                 sh "echo 'Hello ${params.Name}'" 
                 sh "touch test.txt"   
                 sh "echo 'Hello ${params.Name}' > test.txt"
+            }
+        }
+        stage ("Testing") {
+            steps {
+                sh "cat test.txt"
             }
         }
     }
