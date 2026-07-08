@@ -19,6 +19,13 @@ pipeline {
                 }
             }
         }
+        stage ("Process Data") {
+            steps {
+                script {
+                    processData()
+                }
+            }
+        }
     }
     post ('Cleanup') {
         always {
@@ -26,4 +33,12 @@ pipeline {
             echo "always block completed"
         }
     }
+}
+
+@NonCPS
+def processData() {
+    def data = ['item1', 'item2', 'item3']
+    def result = data.collect { it.toUpperCase() }.join(', ')
+    echo "Processed result: ${result}"
+    return result
 }
