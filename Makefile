@@ -30,3 +30,7 @@ test:
 clean:
 	@echo "==> Clean step"
 	@rm -rf dist build .pytest_cache .coverage
+
+deploy:
+	@echo "==> Deploy step"
+	@echo "Deploying the application..."

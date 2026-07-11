@@ -43,5 +43,17 @@ make --version
                 sh 'make test'
             }
         }
+        stage('Approve Prod') {
+            steps {
+                timeout(time: 5, unit: 'Minutes') {
+                    input message: "Confirm to proceed to production deployment", ok: "Deploy", submitter: "admin"
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'make deploy'
+            }
+        }
     }
 }
