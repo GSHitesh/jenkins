@@ -45,7 +45,7 @@ make --version
         }
         stage('Approve Prod') {
             steps {
-                timeout(time: 5, unit: 'Minutes') {
+                timeout(time: 5, unit: 'MINUTES') {
                     input message: "Confirm to proceed to production deployment", ok: "Deploy", submitter: "admin"
                 }
             }
