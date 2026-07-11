@@ -1,0 +1,60 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: 'Name', defaultValue: 'Hitesh', description: 'Enter your name')
+        string(name: 'Age', defaultValue: '25', description: 'Enter your age')
+    }
+
+    stages {
+        stage ("Build") {
+            when {
+                // Runs only if BOTH conditions are true:
+                // branch is 'main' AND the expression returns true
+                branch 'main'
+                expression { return params.Age.toInteger() > 18 }
+            }
+            steps {
+                echo "Building for ${params.Name} (age ${params.Age})"
+            }
+        }
+        stage ("Adult Check") {
+            when {
+                // Custom boolean logic that built-in conditions can't express
+                expression {
+                    return params.Age.toInteger() >= 18 && params.Name?.trim()
+                }
+            }
+            steps {
+                echo "${params.Name} is an adult, proceeding..."
+            }
+        }
+        stage ("Deploy") {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'c1435654-ef8a-4140-814a-e4f7e4c44fc5', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                    sh "echo 'Deploying with username: $USERNAME and password: $PASSWORD'"
+                }
+            }
+        }
+        stage ("Process Data") {
+            steps {
+                script {
+                    processData()
+                }
+            }
+        }
+    }
+    post ('Cleanup') {
+        always {
+            cleanWs()
+            echo "always block completed"
+        }
+    }
+}
+
+@NonCPS
+def processData() {
+    def data = ['item1', 'item2', 'item3']
+    def result = data.collect { it.toUpperCase() }.join(', ')
+    echo "Processed result: ${result}"
+    return result
+}
